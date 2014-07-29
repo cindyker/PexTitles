@@ -72,7 +72,8 @@ public class PexTitles extends JavaPlugin implements Listener {
         if(!existingPlayer)
         {
             //do Pex thingy...
-            user.setPrefix(fc.getString("NewPlayerPrefix"),event.getPlayer().getWorld().getName());
+            user.setPrefix(fc.getString("NewPlayerPrefix"),null);
+            user.save();
             this.getLogger().info("First Join for Player " + player.getName() );
         }
         else
@@ -80,10 +81,11 @@ public class PexTitles extends JavaPlugin implements Listener {
            DebugMessage("Checking Rank for Player " + player.getName());
 
             ConfigurationSection cs = fc.getConfigurationSection("groups");
-            this.getLogger().info("CS stuff " + cs.getName() + " and " + cs.getKeys(false).size());
+            DebugMessage("CS stuff " + cs.getName() + " and " + cs.getKeys(false).size());
+
             for(String key:cs.getKeys(false))
             {
-                DebugMessage("Looking for Rank "+key+" for " + player.getName());
+                DebugMessage("Looking for Rank " + key + " for " + player.getName());
                 String WorldName = cs.getString("world",null);
                 if(user.inGroup(key))
                 {
