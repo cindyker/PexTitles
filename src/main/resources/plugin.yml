@@ -1,0 +1,6 @@
+name: PexTitles
+version: ${project.version}
+description: Set PexTitles on User based on groups
+author: cindy_k
+main: com.minecats.cindyk.pextitles.PexTitles
+depends: [PermissionEx]

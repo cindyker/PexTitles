@@ -1,0 +1,13 @@
+NewPlayerPrefix: '&6[Noob!]'
+# it will resolve group titles in the order they are in this list.
+# so you want to order them in least significant to greatest.
+# if a player is in multiple groups, the bottom one will win.
+groups:
+  example:
+     prefix: '&6[Silly]'
+#Null World.. don't specify it. Its for all worlds.
+  example2:
+     prefix: '&a[&6H&8y&dp&cp&3e&9r&a]'
+     world: 'NameWorld'
+
+Debug: true
