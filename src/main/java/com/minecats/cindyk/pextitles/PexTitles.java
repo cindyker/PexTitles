@@ -1,6 +1,12 @@
 package com.minecats.cindyk.pextitles;
 
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,7 +22,7 @@ import java.util.logging.Level;
 /**
  * Created by cindy on 7/28/14.
  */
-public class PexTitles extends JavaPlugin implements Listener {
+public class PexTitles extends JavaPlugin implements Listener,CommandExecutor {
 
     PexTitles plugin;
 
@@ -28,6 +34,8 @@ public class PexTitles extends JavaPlugin implements Listener {
         plugin = this;
 
         getServer().getPluginManager().registerEvents(this,this);
+        getCommand("pextitles").setExecutor(this);
+
         // Configuration
         try {
 
@@ -56,6 +64,37 @@ public class PexTitles extends JavaPlugin implements Listener {
         getLogger().info("Disabled PexTitles");
 
     }
+
+    public boolean onCommand(CommandSender cs, Command cmd, String string, String[] strings) {
+
+        cs.sendMessage(ChatColor.YELLOW + "[PexTitles] " + ChatColor.GRAY + "Version " + ChatColor.AQUA + getDescription().getVersion() + ChatColor.GRAY + " by " + getDescription().getAuthors().get(0) + ".");
+        if (strings.length != 1) {
+            return true;
+        }
+
+        if (strings[0].equalsIgnoreCase("reload")) {
+            if (cs.hasPermission("PexTitles.reload") || cs.isOp() || cs instanceof ConsoleCommandSender) {
+                try
+                {
+                    reloadConfig();
+                    fc= getConfig();
+                }
+                catch(Exception ex)
+                {
+                    getLogger().warning(ChatColor.RED + "[PexTitles] : RELOADING CONFIG FAILED! Check your YAML!");
+                    getLogger().warning(ex.getMessage());
+                    return true;
+                }
+                cs.sendMessage(ChatColor.GOLD+"Configuration reloaded.");
+            } else {
+                cs.sendMessage(ChatColor.RED+ "You do not have permission to run this command!");
+            }
+        }
+
+        return true;
+
+    }
+
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void firstJoinDetection(PlayerJoinEvent event) {

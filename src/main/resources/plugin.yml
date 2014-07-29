@@ -4,3 +4,7 @@ description: Set PexTitles on User based on groups
 author: cindy_k
 main: com.minecats.cindyk.pextitles.PexTitles
 depends: [PermissionEx]
+commands:
+    pextitles:
+        description: pextitles reload
+        aliases: [pt]

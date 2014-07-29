@@ -1,3 +1,6 @@
+# config can be reloaded in game with /pt reload
+# PexTitles.reload or op permission is needed
+# works from console too.
 NewPlayerPrefix: '&6[Noob!]'
 # it will resolve group titles in the order they are in this list.
 # so you want to order them in least significant to greatest.
